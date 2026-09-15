@@ -16,7 +16,11 @@ class FiestraPrincipal(QMainWindow):
         self.setPalette(paleta)
 
 
+        boton = QPushButton("Pulsame")
+        etiqueta = QLabel("Etiqueta")
 
+        self.setCentralWidget(boton)
+        self.setCentralWidget(etiqueta)
 
         self.show()
 
