@@ -52,17 +52,3 @@ if __name__ == '__main__':
     aplicacion = QApplication(sys.argv)
     fiestra = FiestraPrincipal()
     aplicacion.exec()
-
-
-
-
-
-
-
-
-
-
-    if __name__ == '__main__':
-        aplicacion = QApplication(sys.argv)
-        fiestra = FiestraPrincipal()
-        aplicacion.exec()
