@@ -141,7 +141,7 @@ class FiestraPrincipal(QMainWindow):
         self.etiqueta.setText("")
 
     def delet(self):
-        self.etiqueta.setText(self.etiqueta.text()[0][-1])
+        self.etiqueta.setText(self.etiqueta.text()[0:-1])
 
     def igual(self):
         num1 = int(self.etiqueta.text()[0])
