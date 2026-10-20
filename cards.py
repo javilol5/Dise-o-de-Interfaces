@@ -1,10 +1,11 @@
 import sys
+from urllib.request import HTTPPasswordMgrWithPriorAuth
 
+from PyQt6.QtCore import QTime
 from PyQt6.QtWidgets import (QMainWindow, QApplication, QVBoxLayout, QPushButton, QWidget, QLabel, QLineEdit,
-                             QHBoxLayout, QComboBox, QStackedLayout, QGridLayout, QRadioButton, QCheckBox)
+                             QHBoxLayout, QComboBox, QStackedLayout, QGridLayout, QRadioButton, QCheckBox, QTimeEdit)
 from PyQt6.QtGui import QColor, QPalette
 
-from time import sleep
 
 class FiestraPrincipal(QMainWindow):
     def __init__(self):
@@ -27,6 +28,12 @@ class FiestraPrincipal(QMainWindow):
 
         alumno = QWidget()
         fAlumno = QGridLayout()
+
+        self.nomeAlumno = QLabel("Nombre Alumno")
+        self.nomeAlumnoTxt = QLineEdit()
+
+        self.apellidosAlumno = QLabel("Apellidos Alumno")
+        self.apellidosAlumnoTxt = QLineEdit()
 
         self.ciclo = QLabel("Ciclo")
 
@@ -51,17 +58,20 @@ class FiestraPrincipal(QMainWindow):
         self.pai = QLabel("Nome Pai")
         self.nomePai = QLineEdit()
 
-
-        fAlumno.addWidget(self.ciclo,0,0)
-        fAlumno.addWidget(self.cmbTipo,0,1)
-        fAlumno.addWidget(self.radioButton1,1,0)
-        fAlumno.addWidget(self.radioButton2,1,1)
-        fAlumno.addWidget(self.anoMatricula,2,0)
-        fAlumno.addWidget(self.ano,2,1)
-        fAlumno.addWidget(self.nai,3,0)
-        fAlumno.addWidget(self.nomeNai,3,1)
-        fAlumno.addWidget(self.pai,4,0)
-        fAlumno.addWidget(self.nomePai,4,1)
+        fAlumno.addWidget(self.nomeAlumno,0,0)
+        fAlumno.addWidget(self.nomeAlumnoTxt,0,1)
+        fAlumno.addWidget(self.apellidosAlumno, 1, 0)
+        fAlumno.addWidget(self.apellidosAlumnoTxt, 1, 1)
+        fAlumno.addWidget(self.ciclo,2,0)
+        fAlumno.addWidget(self.cmbTipo,2,1)
+        fAlumno.addWidget(self.radioButton1,3,0)
+        fAlumno.addWidget(self.radioButton2,3,1)
+        fAlumno.addWidget(self.anoMatricula,4,0)
+        fAlumno.addWidget(self.ano,4,1)
+        fAlumno.addWidget(self.nai,5,0)
+        fAlumno.addWidget(self.nomeNai,5,1)
+        fAlumno.addWidget(self.pai,6,0)
+        fAlumno.addWidget(self.nomePai,6,1)
 
         alumno.setLayout(fAlumno)
 
@@ -120,6 +130,40 @@ class FiestraPrincipal(QMainWindow):
         #PAS
         pas = QWidget()
         fPas = QGridLayout()
+
+        self.nomePas = QLabel("Nome")
+        self.txtPasNome = QLineEdit()
+
+        self.apellidosPas = QLabel("Apelidos")
+        self.txtPasApellidos = QLineEdit()
+
+        self.ocupacionTxt = QLabel("Ocupacion")
+        self.ocupacion = QComboBox()
+        self.ocupacion.addItems(["1","2","3","4","5","6","7","8","9"])
+        self.ocupacion.setCurrentIndex(-1)  # -1 para q no empiece con ninguno seleccionado
+
+
+        self.horaTxt = QLabel("Hora de entrada")
+        self.hora = QTimeEdit()
+        self.hora.setTime(QTime.currentTime())
+
+        self.horaSalidaTxt = QLabel("Hora de salida")
+        self.horaSalida = QTimeEdit()
+        self.horaSalida.setTime(QTime.currentTime())
+
+        self.hora.setEnabled(False)
+
+        fPas.addWidget(self.nomePas, 0, 0)
+        fPas.addWidget(self.txtPasNome, 0, 1)
+        fPas.addWidget(self.apellidosPas, 1, 0)
+        fPas.addWidget(self.txtPasApellidos, 1, 1)
+        fPas.addWidget(self.ocupacionTxt, 2, 0)
+        fPas.addWidget(self.ocupacion, 2, 1)
+        fPas.addWidget(self.horaTxt, 3, 0)
+        fPas.addWidget(self.hora, 3, 1)
+        fPas.addWidget(self.horaSalidaTxt, 4, 0)
+        fPas.addWidget(self.horaSalida, 4, 1)
+
 
         pas.setLayout(fPas)
 
