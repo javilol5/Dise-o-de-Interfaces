@@ -127,17 +127,12 @@ class FiestraPrincipal(QMainWindow):
         if self.tablero[fila][columna] == 1:
             boton.setText("*")
             boton.setStyleSheet("background-color: red;")
+            self.timer.stop()
             print("MINA")
 
         else:
 
-            minas = self.contarMinas(fila, columna)
-            if minas > 0:
-                boton.setText(str(minas))
-            else:
-                boton.setText("")
-
-            boton.setStyleSheet("background-color: lightgray;")
+            self.revelar(fila, columna)
             print("seguro")
 
     def contarMinas(self, fila, columna):
@@ -161,8 +156,38 @@ class FiestraPrincipal(QMainWindow):
         self.segundos += 1
         self.tiempo.setText(str(self.segundos))
 
+    def revelar(self, fila, columna):
+        if fila < 0 or fila >= 8 or columna < 0 or columna >= 8:
+            return
 
+        boton = self.botones[fila][columna]
 
+        # No revelar banderas ni casillas ya reveladas
+        if boton.text() == "🚩":
+            return
+
+        if boton.styleSheet() == "background-color: lightgray;":
+            return
+
+        # Si hay una mina, no revelar
+        if self.tablero[fila][columna] == 1:
+            return
+
+        minas = self.contarMinas(fila, columna)
+
+        if minas > 0:
+            boton.setText(str(minas))
+        else:
+            boton.setText("")
+
+        boton.setStyleSheet("background-color: lightgray;")
+
+        # Si no hay minas alrededor, revelar las casillas vecinas
+        if minas == 0:
+            for i in range(fila - 1, fila + 2):
+                for j in range(columna - 1, columna + 2):
+                    if i != fila or j != columna:
+                        self.revelar(i, j)
 
 
 
@@ -201,6 +226,9 @@ class FiestraPrincipal(QMainWindow):
                 self.tablero[fila][columna] = 1
                 minasColocadas += 1
 
+        for fila in self.tablero:
+            print(fila)
+
         # Limpiar los botones
         for fila in self.botones:
             for boton in fila:
@@ -214,6 +242,8 @@ class FiestraPrincipal(QMainWindow):
         self.segundos = 0
         self.tiempo.setText("0")
 
+        self.timer = QTimer(self)
+        self.timer.timeout.connect(self.actualizarTiempo)
 
 
 
