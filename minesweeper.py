@@ -3,6 +3,7 @@ import sys
 from PyQt6.QtCore import QTime, QTimer, Qt, pyqtSignal
 from PyQt6.QtWidgets import QMainWindow, QApplication, QVBoxLayout, QPushButton, QWidget, QLabel, QLineEdit, QHBoxLayout, QComboBox, QStackedLayout, QGridLayout, QRadioButton, QCheckBox, QTimeEdit
 from PyQt6.QtGui import QColor, QPalette
+from PyQt6.QtWidgets import QMessageBox
 
 import random
 
@@ -127,7 +128,7 @@ class FiestraPrincipal(QMainWindow):
         if self.tablero[fila][columna] == 1:
             boton.setText("*")
             boton.setStyleSheet("background-color: red;")
-            self.timer.stop()
+            self.perder()
             print("MINA")
 
         else:
@@ -189,9 +190,14 @@ class FiestraPrincipal(QMainWindow):
                     if i != fila or j != columna:
                         self.revelar(i, j)
 
+    def perder(self):
+        self.timer.stop()
 
-
-
+        mensaje = QMessageBox(self)
+        mensaje.setWindowTitle("MineSweeper")
+        mensaje.setText("¡Has perdido!")
+        mensaje.setIcon(QMessageBox.Icon.Critical)
+        mensaje.exec()
 
 
 
