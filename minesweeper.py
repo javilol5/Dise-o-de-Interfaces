@@ -70,8 +70,8 @@ class FiestraPrincipal(QMainWindow):
         grid = QGridLayout()
 
         self.minasRestantes = QLabel("10")
-        self.vivo = QPushButton("Vivo")
-        self.vivo.clicked.connect(self.restart)
+        self.reiniciar = QPushButton("Reiniciar")
+        self.reiniciar.clicked.connect(self.restart)
 
         self.tiempo = QLabel("0")
         self.segundos = 0
@@ -82,7 +82,7 @@ class FiestraPrincipal(QMainWindow):
 
 
         gridUp.addWidget(self.minasRestantes, 0, 0)
-        gridUp.addWidget(self.vivo, 0, 1)
+        gridUp.addWidget(self.reiniciar, 0, 1)
         gridUp.addWidget(self.tiempo, 0, 2)
 
 
