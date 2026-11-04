@@ -60,8 +60,11 @@ class FiestraPrincipal(QMainWindow):
 
     def on_btnEngadir_clicked(self):
         txt = self.txtTarefa.text()
-        self.listaTarefas = self.listaTarefas + (False, txt)
-        self.show()
+
+        if txt != "":
+            self.listaTarefas.append((False, txt))
+            self.txtTarefa.clear()
+            self.modelo.layoutChanged.emit()
 
 if __name__ == '__main__':
     aplicacion = QApplication(sys.argv)
