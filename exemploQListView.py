@@ -25,7 +25,7 @@ class FiestraPrincipal(QMainWindow):
 
         self.lstTarefas = QListView()
         self.lstTarefas.setModel(self.modelo)
-        self.lstTarefas.setSelectionMode(QListView.SelectionMode.MultiSelection)
+        self.lstTarefas.setSelectionMode(QListView.SelectionMode.SingleSelection)
         caixaV.addWidget(self.lstTarefas)
 
         caixaBotons = QHBoxLayout()
@@ -53,7 +53,15 @@ class FiestraPrincipal(QMainWindow):
         self.show()
 
     def on_btnBorrar_clicked(self):
-        pass
+
+        pos = self.lstTarefas.selectedIndexes()
+
+        for indice in pos:
+            self.listaTarefas.pop(indice.row())
+
+        self.modelo.layoutChanged.emit()
+
+        self.lstTarefas.clearSelection()
 
     def on_btnFeito_clicked(self):
         pass
