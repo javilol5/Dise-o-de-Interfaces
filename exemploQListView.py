@@ -1,4 +1,5 @@
 import sys
+import math
 
 from PyQt6.QtWidgets import (QMainWindow, QApplication, QVBoxLayout, QPushButton, QWidget, QLabel, QLineEdit,
                              QHBoxLayout, QListView)
@@ -16,9 +17,9 @@ class FiestraPrincipal(QMainWindow):
         self.setMinimumSize(400, 600)
         self.setMaximumSize(400, 400)
 
-        listaTarefas = [(True, "Ir o centro DC"), (False, "Ir o ximnasio"), (False, "Ir a compra")]
+        self.listaTarefas = [(True, "Ir o centro DC"), (False, "Ir o ximnasio"), (False, "Ir a compra"),(False, "Outra")]
 
-        self.modelo = ModeloTarefas(listaTarefas)
+        self.modelo = ModeloTarefas(self.listaTarefas)
 
         caixaV = QVBoxLayout()
 
@@ -38,16 +39,29 @@ class FiestraPrincipal(QMainWindow):
 
         caixaV.addLayout(caixaBotons)
 
+        self.txtTarefa = QLineEdit()
+        caixaV.addWidget(self.txtTarefa)
+        btnEngadir = QPushButton("Engadir Tarefa")
+        btnEngadir.clicked.connect(self.on_btnEngadir_clicked)
+        caixaBotons.addWidget(btnEngadir)
+
+
         contenedor = QWidget()
         contenedor.setLayout(caixaV)
         self.setCentralWidget(contenedor)
 
         self.show()
 
-        def on_btnBorrar_clicked(self):
-            pass
-        def on_btnFeito_clicked(self):
-            pass
+    def on_btnBorrar_clicked(self):
+        pass
+
+    def on_btnFeito_clicked(self):
+        pass
+
+    def on_btnEngadir_clicked(self):
+        txt = self.txtTarefa.text()
+        self.listaTarefas = self.listaTarefas + (False, txt)
+        self.show()
 
 if __name__ == '__main__':
     aplicacion = QApplication(sys.argv)
