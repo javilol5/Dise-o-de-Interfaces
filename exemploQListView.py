@@ -68,13 +68,10 @@ class FiestraPrincipal(QMainWindow):
         pos = self.lstTarefas.selectedIndexes()
 
         for indice in pos:
-            self.listaTarefas[indice.row()]
+            fila = indice.row()
+            _, texto = self.listaTarefas[fila]
 
-            for indice in pos:
-                fila = indice.row()
-                _, texto = self.listaTarefas[fila]
-
-                self.listaTarefas[fila] = (True, texto)
+            self.listaTarefas[fila] = (True, texto)
 
         self.modelo.layoutChanged.emit()
         self.lstTarefas.clearSelection()
