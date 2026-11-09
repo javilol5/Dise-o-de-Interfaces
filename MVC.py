@@ -16,6 +16,10 @@ class ModeloTarefas (QAbstractListModel):
             estado, _ = self.tarefas [indice.row()]
             if estado:
                 return imagen
+        if rol == Qt.ItemDataRole.BackgroundRole:
+            estado, _ = self.tarefas [indice.row()]
+            if not estado:
+                return QColor("LightPink")
 
     def rowCount(self, indice):
         return len(self.tarefas)
