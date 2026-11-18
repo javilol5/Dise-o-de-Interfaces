@@ -27,11 +27,9 @@ class ModeloTabla(QAbstractTableModel):
                         return Qt.CheckState.Checked
                     else:
                         return Qt.CheckState.Unchecked
-
+            # COLORES
             if rol == Qt.ItemDataRole.BackgroundRole:
                 genero = self.tabla[indice.row() + 1][2]
-
-
                 if genero == "Home":
                     return QColor("pink")
                 if genero == "Muller":
@@ -42,18 +40,16 @@ class ModeloTabla(QAbstractTableModel):
         if rol == Qt.ItemDataRole.EditRole:
 
             if indice.column() == 0:
-                self.tabla[indice.row() + 1][indice.column()] = valor
-                self.dataChanged.emit(indice, indice)
-                return True
+                if valor != "":
+                    self.tabla[indice.row() + 1][indice.column()] = valor.capitalize()
+                    self.dataChanged.emit(indice, indice)
+                    return True
 
             if indice.column() == 2:
                 if valor.lower() in ("home", "muller"):
                     self.tabla[indice.row() + 1][indice.column()] = valor.capitalize()
                     self.dataChanged.emit(indice, indice)
                     return True
-
-
-
 
         if rol == Qt.ItemDataRole.CheckStateRole:
             if indice.column() == 3:
@@ -68,6 +64,8 @@ class ModeloTabla(QAbstractTableModel):
         if rol == Qt.ItemDataRole.DisplayRole:
             if orientacion == Qt.Orientation.Horizontal:
                 return self.tabla[0][seccion]
+        if rol == Qt.ItemDataRole.BackgroundRole:
+            return QColor("lightgray")
 
     def flags(self, indice):
 
