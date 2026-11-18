@@ -14,16 +14,25 @@ class ModeloTabla(QAbstractTableModel):
 
     def data(self, indice, rol):
         if indice.isValid():
+
+            dato = self.tabla[indice.row() + 1 ][indice.column()]
+
             if rol == Qt.ItemDataRole.DisplayRole:
-                dato = self.tabla[indice.row() + 1][indice.column()]
+                if indice.row() == -1 or indice.column() != 3:
+                    return dato
 
-                if indice.column() == 3:
-                    if dato == True:
-                        return "✓"
-                    else:
-                        return "✗"
+            if rol == Qt.ItemDataRole.CheckStateRole:
+                if indice.row() != -1 and indice.column() == 3:
+                    return dato
 
-                return dato
+    def setData(self, indice, valor, rol):
+        if rol == Qt.ItemDataRole.EditRole:
+            if indice.row() == -1 and indice.column() != 1 and indice.column() != 3:
+                self.tabla[indice.row() + 1][indice.column()] = valor
+                return True
+
+        return False
+
 
     def headerData(self, seccion, orientacion, rol):
         if rol == Qt.ItemDataRole.DisplayRole:
@@ -31,4 +40,11 @@ class ModeloTabla(QAbstractTableModel):
                 return self.tabla[0][seccion]
 
     def flags(self, indice):
-        return Qt.ItemFlag.ItemIsEnabled
+
+        condicions = Qt.ItemFlag.ItemIsEnabled
+
+        if indice.row() != -1 and indice.column() != 1:
+            condicions = condicions | Qt.ItemFlag.ItemIsEditable
+        if indice.row() != -1 and indice.column() != 3:
+            condicions = condicions | Qt.ItemFlag.ItemIsUserCheckable
+        return condicions

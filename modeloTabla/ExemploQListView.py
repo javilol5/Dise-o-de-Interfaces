@@ -11,7 +11,7 @@ class FiestraPrincipal(QMainWindow):
 
         self.setWindowTitle("Fiesta Principal")
 
-        self.setMinimumSize(200, 200)
+        self.setMinimumSize(425, 200)
         self.setMaximumSize(1000, 1000)
 
         caixaV = QVBoxLayout()
