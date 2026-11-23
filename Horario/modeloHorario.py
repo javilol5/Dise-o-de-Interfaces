@@ -24,7 +24,16 @@ class ModeloHorario(QAbstractTableModel):
                 return dato
 
     def setData(self, indice, valor, rol):
-        pass
+
+
+
+        if rol == Qt.ItemDataRole.EditRole:
+            if indice.row() != 4:
+                self.tabla[indice.row()][indice.column()] = valor
+                self.dataChanged.emit(indice, indice)
+                return True
+
+        return False
 
     def headerData(self, seccion, orientacion, rol):
         if rol == Qt.ItemDataRole.DisplayRole:
@@ -33,16 +42,11 @@ class ModeloHorario(QAbstractTableModel):
             if orientacion == Qt.Orientation.Vertical:
                 return self.datosSide[seccion]
 
-
-
-
-
     def flags(self, indice):
 
-        condicions = Qt.ItemFlag.ItemIsEnabled
+        condicions = Qt.ItemFlag.ItemIsEnabled | Qt.ItemFlag.ItemIsSelectable
 
-        if indice.row() != -1 and indice.column() != 1:
-            condicions = condicions | Qt.ItemFlag.ItemIsEditable
-        if indice.row() != -1 and indice.column() == 3:
-            condicions = condicions | Qt.ItemFlag.ItemIsUserCheckable | Qt.ItemFlag.ItemIsEditable
+        if indice.row() != 4:
+            condicions |= Qt.ItemFlag.ItemIsEditable
+
         return condicions

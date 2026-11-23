@@ -1,11 +1,9 @@
 import sys
-import math
 
-from PyQt6.QtWidgets import (QMainWindow, QApplication, QVBoxLayout, QPushButton, QWidget, QLabel, QLineEdit,
+from PyQt6.QtWidgets import (QMainWindow, QApplication, QVBoxLayout, QPushButton, QWidget, QLineEdit,
                              QHBoxLayout, QListView)
-from PyQt6.QtGui import QColor, QPalette
 
-from MVC import ModeloTarefas
+from lista_cosas.MVC import ModeloTarefas
 
 
 class FiestraPrincipal(QMainWindow):
