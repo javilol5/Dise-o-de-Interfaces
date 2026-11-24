@@ -28,6 +28,20 @@ class FiestraPrincipal(QMainWindow):
 
         caixaV.addWidget(self.tvwTaboa)
 
+        caixaH = QHBoxLayout()
+
+        self.novo = QPushButton("Novo")
+        caixaH.addWidget(self.novo)
+        self.modificar = QPushButton("Modificar")
+        caixaH.addWidget(self.modificar)
+        self.borrar = QPushButton("Borrar")
+        caixaH.addWidget(self.borrar)
+
+
+        caixaV.addLayout(caixaH)
+
+
+
         grid = QGridLayout()
 
 
